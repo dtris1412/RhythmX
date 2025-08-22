@@ -1,7 +1,6 @@
 // models/Playlist.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Playlist extends Model {
     static associate(models) {
       Playlist.belongsTo(models.User, { foreignKey: "owner_id" });

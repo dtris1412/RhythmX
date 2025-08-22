@@ -1,7 +1,6 @@
 // models/Comment.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Comment extends Model {
     static associate(models) {
       Comment.belongsTo(models.User, { foreignKey: "user_id" });
@@ -16,8 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Comment",
-      tableName: "comments",
-      timestamps: false,
     }
   );
   return Comment;

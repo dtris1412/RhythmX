@@ -1,7 +1,6 @@
 // models/Song.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Song extends Model {
     static associate(models) {
       Song.belongsTo(models.Artist, { foreignKey: "artist_id" });

@@ -1,7 +1,6 @@
 // models/Artist.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Artist extends Model {
     static associate(models) {
       Artist.hasMany(models.Album, { foreignKey: "artist_id" });
@@ -18,8 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Artist",
-      tableName: "artists",
-      timestamps: false,
     }
   );
   return Artist;

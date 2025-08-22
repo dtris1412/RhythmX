@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import viewEngine from "./config/viewEngine.js";
 import initWebRoutes from "./routes/web.js";
 import connectDB from "./config/connectDB.js";
+import userRoutes from "./routes/web.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ viewEngine(app);
 
 // Init web routes
 initWebRoutes(app);
+app.use("/api/users", userRoutes);
 
 // Connect to DB
 connectDB();

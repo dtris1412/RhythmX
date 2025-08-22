@@ -1,0 +1,142 @@
+.favorites-page {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary),
+    var(--primary-green)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 64px 32px;
+  color: var(--text-muted);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: var(--primary-green);
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.song-item:hover {
+  background: rgba(34, 197, 94, 0.1);
+  transform: translateX(4px);
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.song-info img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.song-details h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.song-details p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.song-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.duration {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  min-width: 40px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  color: var(--primary-green);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.action-btn.liked {
+  color: var(--primary-green);
+}
+
+@media (max-width: 768px) {
+  .page-header h2 {
+    font-size: 2rem;
+  }
+
+  .song-actions {
+    gap: 12px;
+  }
+}

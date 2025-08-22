@@ -1,7 +1,6 @@
 // models/Report.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Report extends Model {
     static associate(models) {
       Report.belongsTo(models.User, { foreignKey: "user_id" });

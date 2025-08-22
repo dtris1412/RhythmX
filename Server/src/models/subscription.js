@@ -1,7 +1,6 @@
 // models/Subscription.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Subscription extends Model {
     static associate(models) {
       Subscription.belongsTo(models.User, { foreignKey: "user_id" });

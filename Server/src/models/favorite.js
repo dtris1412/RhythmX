@@ -1,7 +1,6 @@
 // models/Favorite.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class Favorite extends Model {
     static associate(models) {
       Favorite.belongsTo(models.User, { foreignKey: "user_id" });
@@ -15,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Favorite",
-      tableName: "favorites",
-      timestamps: false,
     }
   );
   return Favorite;

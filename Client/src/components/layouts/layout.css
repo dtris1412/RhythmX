@@ -1,0 +1,24 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  padding-bottom: 90px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(100vh - 90px);
+}
+
+@media (max-width: 1024px) {
+  .app-container .right-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px;
+  }
+}

@@ -1,7 +1,6 @@
 // models/HistoryPlay.js
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
+import { Model } from "sequelize";
+export default (sequelize, DataTypes) => {
   class History_Play extends Model {
     static associate(models) {
       History_Play.belongsTo(models.User, { foreignKey: "user_id" });
