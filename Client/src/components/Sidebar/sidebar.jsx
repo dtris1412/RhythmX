@@ -59,7 +59,7 @@ const Sidebar = () => {
             <i className="fas fa-user"></i>
           </div>
           <div className="user-info">
-            <span className="username">{user?.name || "Người dùng"}</span>
+            <span className="username">{user?.username || "Người dùng"}</span>
             <button className="logout-btn" onClick={logout}>
               <i className="fas fa-sign-out-alt"></i>
             </button>

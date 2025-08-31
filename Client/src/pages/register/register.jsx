@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 import Toast from "../../components/Toast/toast";
 import "./register.css";
 
 const Register = () => {
   const { register } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fullname: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -34,8 +35,8 @@ const Register = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullname.trim()) {
-      newErrors.fullname = "Vui lòng nhập họ và tên";
+    if (!formData.username.trim()) {
+      newErrors.username = "Vui lòng nhập tên người dùng";
     }
 
     if (!formData.email) {
@@ -72,10 +73,16 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await register(formData.fullname, formData.email, formData.password);
+      await register(formData.username, formData.email, formData.password);
       setToast({ type: "success", message: "Đăng ký thành công!" });
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
     } catch (error) {
-      setToast({ type: "error", message: "Có lỗi xảy ra, vui lòng thử lại" });
+      setToast({
+        type: "error",
+        message: error.message || "Có lỗi xảy ra, vui lòng thử lại",
+      });
     } finally {
       setLoading(false);
     }
@@ -88,7 +95,7 @@ const Register = () => {
           <div className="auth-header">
             <div className="logo">
               <i className="fas fa-music"></i>
-              <h1>VibeMusic</h1>
+              <h1>RhythmX</h1>
             </div>
             <h2>Tạo tài khoản mới</h2>
             <p>Tham gia cộng đồng âm nhạc của chúng tôi</p>
@@ -96,25 +103,25 @@ const Register = () => {
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="fullname">Họ và tên</label>
+              <label htmlFor="username">Tên người dùng</label>
               <div
-                className={`input-container ${errors.fullname ? "error" : ""}`}
+                className={`input-container ${errors.username ? "error" : ""}`}
               >
                 <i className="fas fa-user"></i>
                 <input
                   type="text"
-                  id="fullname"
-                  name="fullname"
-                  placeholder="Nhập họ và tên"
-                  value={formData.fullname}
+                  id="username"
+                  name="username"
+                  placeholder="Nhập tên người dùng"
+                  value={formData.username}
                   onChange={handleChange}
                   required
                 />
               </div>
-              {errors.fullname && (
+              {errors.username && (
                 <div className="error-message">
                   <i className="fas fa-exclamation-circle"></i>
-                  {errors.fullname}
+                  {errors.username}
                 </div>
               )}
             </div>

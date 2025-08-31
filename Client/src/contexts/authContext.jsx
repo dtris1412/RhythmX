@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -28,46 +29,55 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password, remember = false) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  const login = async (email, password_hash, remember = false) => {
+    try {
+      const res = await axios.post("http://localhost:8080/api/login", {
+        email,
+        password_hash,
+      });
+      const userData = res.data.user; // hoặc res.data tuỳ backend trả về
+      const token = res.data.token;
 
-    const userData = {
-      email,
-      name: email.split("@")[0],
-      id: Date.now(),
-    };
+      setIsAuthenticated(true);
+      setUser(userData);
 
-    setIsAuthenticated(true);
-    setUser(userData);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("currentUser", JSON.stringify(userData));
+      localStorage.setItem("token", token);
 
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("currentUser", JSON.stringify(userData));
+      if (remember) {
+        localStorage.setItem("rememberLogin", "true");
+      }
 
-    if (remember) {
-      localStorage.setItem("rememberLogin", "true");
+      return userData;
+    } catch (err) {
+      throw new Error(
+        err.response?.data?.message || "Đăng nhập thất bại, vui lòng thử lại!"
+      );
     }
-
-    return userData;
   };
 
-  const register = async (fullname, email, password) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  const register = async (username, email, password) => {
+    try {
+      const res = await axios.post("http://localhost:8080/api/register", {
+        username,
+        email,
+        password_hash: password,
+      });
+      const userData = res.data.user;
+      const token = res.data.token;
 
-    const userData = {
-      email,
-      name: fullname,
-      id: Date.now(),
-    };
+      setIsAuthenticated(true);
+      setUser(userData);
 
-    setIsAuthenticated(true);
-    setUser(userData);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("currentUser", JSON.stringify(userData));
+      localStorage.setItem("token", token);
 
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("currentUser", JSON.stringify(userData));
-
-    return userData;
+      return userData;
+    } catch (err) {
+      throw new Error(err.response?.data?.message || "Đăng ký thất bại!");
+    }
   };
 
   const logout = () => {

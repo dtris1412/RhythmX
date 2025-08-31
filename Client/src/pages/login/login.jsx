@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 import Toast from "../../components/Toast/toast";
 import "./login.css";
 
 const Login = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -54,12 +55,17 @@ const Login = () => {
     if (!validateForm() || loading) return;
 
     setLoading(true);
+    setToast(null);
 
     try {
       await login(formData.email, formData.password, formData.remember);
       setToast({ type: "success", message: "Đăng nhập thành công!" });
+      navigate("/"); // chuyển hướng về trang chủ
     } catch (error) {
-      setToast({ type: "error", message: "Email hoặc mật khẩu không đúng" });
+      setToast({
+        type: "error",
+        message: error.message || "Có lỗi xảy ra, vui lòng thử lại",
+      });
     } finally {
       setLoading(false);
     }
@@ -72,7 +78,7 @@ const Login = () => {
           <div className="auth-header">
             <div className="logo">
               <i className="fas fa-music"></i>
-              <h1>VibeMusic</h1>
+              <h1>RhythmX</h1>
             </div>
             <h2>Chào mừng trở lại</h2>
             <p>Đăng nhập để tiếp tục trải nghiệm âm nhạc</p>
